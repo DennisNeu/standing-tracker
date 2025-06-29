@@ -1,0 +1,56 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Standing Desk Tracker</title>
+    <meta name="description" content="Track your standing desk usage with this simple web application.">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <link rel="icon" href="favicon.ico" type="favicon.ico">
+</head>
+<body>
+    <main> 
+        <h1 class="box">
+        <pre>
+   _____ __                  __   __  __      __
+  / ___// /_____ _____  ____/ /  / / / /___  / /
+  \__ \/ __/ __ `/ __ \/ __  /  / / / / __ \/ / 
+ ___/ / /_/ /_/ / / / / /_/ /  / /_/ / /_/ /_/  
+/____/\__/\__,_/_/ /_/\__,_/   \____/ .___(_)   
+                                   /_/          
+        </pre>
+    </h1>
+
+    <section class="counter box">
+        <div class="timer" id="timer-display">00 : 00 : 00.00</div>
+    </section>
+
+    <section class="totaltime box">
+        <div id="totaltime">
+            <h2>Total Time:</h2>
+            <div class="timer-smaller" id="total-time">00 : 00 : 00.00</div>
+        </div>
+    </section>
+
+    <section class="highscore box">
+        <div id="highscore">
+            <h2>Highscore:</h2>
+            <div class="timer-smaller" id="highscore">00 : 00 : 00.00</div>
+        </div>
+    </section>
+
+    <section class="buttons">
+        <button id="toggle-btn" class="button">Start</button>
+    </section>
+
+    </main>
+
+    <footer>
+        <p>Made with ❤️ by <a href="https://github.com/DennisNeu">DennisNeu</a></p>
+    </footer>
+
+    <script src="{% static 'script.js' %}"></script>
+</body>
+</html>
