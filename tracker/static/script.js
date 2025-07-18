@@ -48,14 +48,6 @@ function formatTime(ms) {
   return `${pad(hours)} : ${pad(minutes)} : ${pad(seconds)}.${pad(centiseconds)}`;
 }
 
-function formatTotalTime(seconds) {
-  console.log("total time:", seconds);
-    const hours = Math.floor(seconds / 3600);
-    const minutes = Math.floor((seconds % 3600) / 60);
-    const secs = Math.floor(seconds % 60);
-    return `${hours}h ${minutes}m ${secs}s`;
-}
-
 function submitElapsedTime(seconds) {
     fetch('/api/submit-time/', {
         method: 'POST',
