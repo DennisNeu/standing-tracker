@@ -1,4 +1,5 @@
 const timerDisplay = document.getElementById('timer-display');
+const totalTimeDisplay = document.getElementById('total-time');
 const toggleBtn = document.getElementById('toggle-btn');
 
 let startTime = null;
@@ -7,8 +8,9 @@ let intervalId = null;
 let running = false;
 let elapsed = 0;
 
+totalTimeDisplay.textContent = formatTime(parseFloat(totalTimeDisplay.textContent))
+
 toggleBtn.addEventListener('click', () => {
-  console.log("Toggle button clicked");
   if (!running) {
     startTimer();
     toggleBtn.classList.add("stop")
@@ -44,6 +46,14 @@ function formatTime(ms) {
   const hours = Math.floor(totalSeconds / 3600);
   const pad = (num, size = 2) => String(num).padStart(size, '0');
   return `${pad(hours)} : ${pad(minutes)} : ${pad(seconds)}.${pad(centiseconds)}`;
+}
+
+function formatTotalTime(seconds) {
+  console.log("total time:", seconds);
+    const hours = Math.floor(seconds / 3600);
+    const minutes = Math.floor((seconds % 3600) / 60);
+    const secs = Math.floor(seconds % 60);
+    return `${hours}h ${minutes}m ${secs}s`;
 }
 
 function submitElapsedTime(seconds) {

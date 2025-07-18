@@ -4,5 +4,5 @@ from django.db import models
 
 
 class StandingTime(models.Model):
-    time = models.DurationField(max_length=20)  # Or use models.DurationField if
+    time = models.FloatField(max_length=20)  # Or use models.DurationField if
     created_at = models.DateTimeField(auto_now_add=True)
