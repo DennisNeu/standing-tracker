@@ -23,7 +23,10 @@ def save_standing_time(request):
             data = json.loads(request.body)
             elapsed_time = data.get('elapsed')
             StandingTime.objects.create(time=elapsed_time)
-            return JsonResponse({'status': 'success', 'message': 'Standing time saved successfully'})
+
+            total = StandingTime.objects.aggregate(Sum('time'))['time__sum'] or 0
+
+            return JsonResponse({'status': 'success', 'message': 'Standing time saved successfully', 'total': total})
         except Exception as e:
             return JsonResponse({'status': 'error', 'message': str(e)}, status=400)
     return JsonResponse({'status': 'error', 'message': 'Invalid request method'}, status=405)

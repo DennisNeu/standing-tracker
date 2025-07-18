@@ -67,7 +67,11 @@ function submitElapsedTime(seconds) {
     })
     .then(response => response.json())
     .then(data => {
-        console.log("Response from server:", data);
+        if (data.status === "success") {
+          totalTimeDisplay.textContent = formatTime(data.total);  
+        } else {
+          console.error("Server error:", data.message);
+        }
     })
     .catch(error => {
         console.error("Error:", error);
