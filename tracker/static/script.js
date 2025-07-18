@@ -5,6 +5,7 @@ let startTime = null;
 let elapsedBeforePause = 0;
 let intervalId = null;
 let running = false;
+let elapsed = 0;
 
 toggleBtn.addEventListener('click', () => {
   if (!running) {
@@ -19,7 +20,7 @@ toggleBtn.addEventListener('click', () => {
 function startTimer() {
   startTime = Date.now() - elapsedBeforePause;
   intervalId = setInterval(() => {
-    const elapsed = Date.now() - startTime;
+    elapsed = Date.now() - startTime;
     elapsedBeforePause = elapsed;
     timerDisplay.textContent = formatTime(elapsed);
   }, 10); // update every 10 ms for centiseconds
@@ -27,6 +28,7 @@ function startTimer() {
 
 function stopTimer() {
   clearInterval(intervalId);
+  submitElapsedTime(elapsed);
 }
 
 function formatTime(ms) {
@@ -38,4 +40,22 @@ function formatTime(ms) {
   const hours = Math.floor(totalSeconds / 3600);
   const pad = (num, size = 2) => String(num).padStart(size, '0');
   return `${pad(hours)} : ${pad(minutes)} : ${pad(seconds)}.${pad(centiseconds)}`;
+}
+
+function submitElapsedTime(seconds) {
+    fetch('/api/submit-time/', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            // Add CSRF token here if CSRF protection is enabled
+        },
+        body: JSON.stringify({ elapsed: seconds })
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("Response from server:", data);
+    })
+    .catch(error => {
+        console.error("Error:", error);
+    });
 }
