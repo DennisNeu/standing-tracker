@@ -1,5 +1,6 @@
 const timerDisplay = document.getElementById('timer-display');
 const totalTimeDisplay = document.getElementById('total-time');
+const highscoreDisplay = document.getElementById('highscore-time');
 const toggleBtn = document.getElementById('toggle-btn');
 
 let startTime = null;
@@ -8,6 +9,8 @@ let intervalId = null;
 let running = false;
 let elapsed = 0;
 
+// Format the highscore and total time displays
+highscoreDisplay.textContent = formatTime(parseFloat(highscoreDisplay.textContent));
 totalTimeDisplay.textContent = formatTime(parseFloat(totalTimeDisplay.textContent))
 
 toggleBtn.addEventListener('click', () => {

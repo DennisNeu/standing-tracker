@@ -10,10 +10,10 @@ from .models import StandingTime
 
 
 def index(request):
-    highscore = "00 : 01 : 00.00"  # Placeholder for highscore, replace with actual logic if needed
+    highscore = StandingTime.objects.all().order_by('-time').first()
     total = StandingTime.objects.aggregate(Sum('time'))['time__sum'] or 0
-
-    return render(request, 'index.html', {'highscore': highscore, 'total': total})
+    print(f"highscore: {highscore.time}; total: {total}")
+    return render(request, 'index.html', {'highscore': highscore.time, 'total': total})
 
 
 @csrf_exempt  # Use this decorator to allow POST requests without CSRF token
