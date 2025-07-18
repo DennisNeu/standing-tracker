@@ -12,7 +12,7 @@ from .models import StandingTime
 def index(request):
     highscore = "00 : 01 : 00.00"  # Placeholder for highscore, replace with actual logic if needed
     total = StandingTime.objects.aggregate(Sum('time'))['time__sum'] or 0
-    
+
     return render(request, 'index.html', {'highscore': highscore, 'total': total})
 
 
