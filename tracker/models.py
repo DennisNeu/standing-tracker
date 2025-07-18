@@ -1,6 +1,8 @@
 from django.db import models
 
 # Create your models here.
+
+
 class Session(models.Model):
     session_id = models.CharField(max_length=100, unique=True)
     start_time = models.DateTimeField(auto_now_add=True)
