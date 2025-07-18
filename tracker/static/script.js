@@ -64,6 +64,7 @@ function submitElapsedTime(seconds) {
     .then(data => {
         if (data.status === "success") {
           totalTimeDisplay.textContent = formatTime(data.total);  
+          highscoreDisplay.textContent = formatTime(data.highscore);
         } else {
           console.error("Server error:", data.message);
         }
