@@ -20,4 +20,5 @@ from . import views
 
 urlpatterns = [
     path('', views.index, name='index'),
+    path('api/submit-time/', views.save_standing_time, name='save_standing_time'),
 ]

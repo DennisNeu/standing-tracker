@@ -8,6 +8,7 @@ let running = false;
 let elapsed = 0;
 
 toggleBtn.addEventListener('click', () => {
+  console.log("Toggle button clicked");
   if (!running) {
     startTimer();
   } else {
@@ -18,10 +19,11 @@ toggleBtn.addEventListener('click', () => {
 });
 
 function startTimer() {
-  startTime = Date.now() - elapsedBeforePause;
+  elapsed = 0; // Reset elapsed time
+  timerDisplay.textContent = formatTime(elapsed); // Reset display
+  startTime = Date.now();
   intervalId = setInterval(() => {
     elapsed = Date.now() - startTime;
-    elapsedBeforePause = elapsed;
     timerDisplay.textContent = formatTime(elapsed);
   }, 10); // update every 10 ms for centiseconds
 }
