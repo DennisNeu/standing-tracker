@@ -11,6 +11,7 @@ def index(request):
     highscore = "00 : 01 : 00.00"  # Placeholder for highscore, replace with actual logic if needed
     return render(request, 'index.html', {'highscore': highscore})
 
+
 @csrf_exempt  # Use this decorator to allow POST requests without CSRF token
 def save_standing_time(request):
     if request.method == 'POST':

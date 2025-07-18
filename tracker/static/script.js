@@ -11,8 +11,10 @@ toggleBtn.addEventListener('click', () => {
   console.log("Toggle button clicked");
   if (!running) {
     startTimer();
+    toggleBtn.classList.add("stop")
   } else {
     stopTimer();
+    toggleBtn.classList.remove("stop")
   }
   running = !running;
   toggleBtn.textContent = running ? "Stop" : "Start";
