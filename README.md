@@ -20,7 +20,7 @@ Open a terminal and install the system dependencies:
 
 ```bash
 sudo apt update
-sudo apt install python3 python3-venv python3-pip git nginx -y
+sudo apt install python3 python3-venv python3-pip git nginx gunicorn -y
 ```
 
 ---
