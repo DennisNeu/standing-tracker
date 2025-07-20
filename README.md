@@ -6,29 +6,84 @@ A web-application to monitor and log your standing time at a sit-stand desk, pro
 - **Total Time Tracking**: Track total time spent standing (*gamification*).
 - **Data Logging**: Persistent storage of session data for historical reference.
 
-Still heavily WIP (no highscore functionality, no protection against cross site request forgery; however the app is supposed to be local-only)
+Still WIP
 
-## 🚀 Deployment (Gunicorn + systemd)
+## 🚀 Full Deployment Guide
 
-This project can be deployed on a server using Gunicorn and optionally Nginx. Below is a step-by-step guide to get the `standing-tracker` running as a persistent service.
-
-### ⚙️ 1. Configure Django for Production
-
-- Set `DEBUG = False` in `tracker/settings.py`
-- Add your Pi’s IP or hostname to `ALLOWED_HOSTS`, e.g.:
-  ```python
-  ALLOWED_HOSTS = ['192.168.0.100', 'localhost']
-  ```
-- Collect static files:
-  ```bash
-  python3 manage.py collectstatic
-  ```
+This guide explains how to deploy the `standing-tracker` Django project on a linux server using Gunicorn.
 
 ---
 
-### 🛠️ Setup systemd Service for Gunicorn
+### 📦 1. Install Required Packages
 
-Create a file at `/etc/systemd/system/standing-tracker.service` with:
+Open a terminal and install the system dependencies:
+
+```bash
+sudo apt update
+sudo apt install python3 python3-venv python3-pip git nginx -y
+```
+
+---
+
+### 📥 2. Download the Repository
+
+Navigate to your home directory and clone the repository:
+
+```bash
+cd ~
+git clone https://github.com/DennisNeu/standing-tracker.git
+cd standing-tracker
+```
+
+---
+
+### 🐍 3. Create and Activate a Virtual Environment
+
+```bash
+python3 -m venv venv
+source venv/bin/activate
+```
+
+---
+
+### 📚 4. Install Python Dependencies
+
+Make sure you're in the virtual environment (`(venv)` appears in your terminal prompt), then:
+
+```bash
+pip install --upgrade pip
+pip install -r requirements.txt
+```
+
+---
+
+### 🔧 5. Configure Django for Deployment
+
+Open `tracker/settings.py` and:
+- Set `DEBUG = False`
+- Add your Pi’s IP or hostname to `ALLOWED_HOSTS`, e.g.:
+
+```python
+ALLOWED_HOSTS = ['192.168.178.5', 'localhost']
+```
+
+Collect static files:
+
+```bash
+python3 manage.py collectstatic
+```
+
+---
+
+### 🛠️ 6. Create a systemd Service for Gunicorn
+
+Create a new service file:
+
+```bash
+sudo nano /etc/systemd/system/standing-tracker.service
+```
+
+Paste the following content (edit paths if needed):
 
 ```ini
 [Unit]
@@ -46,7 +101,7 @@ ExecStart=/home/pi/standing-tracker/venv/bin/gunicorn --workers 3 --bind 127.0.0
 WantedBy=multi-user.target
 ```
 
-Enable and start the service:
+Save and exit, then:
 
 ```bash
 sudo systemctl daemon-reexec
@@ -57,49 +112,7 @@ sudo systemctl status standing-tracker
 
 ---
 
-### 🌐 (Optional) Reverse Proxy with Nginx
+You’re now running `standing-tracker` on your server! 🎉
 
-Install Nginx:
+It should be reachable by entering <serverip>:8000 (e.g. '192.168.178.5') into your web browser
 
-```bash
-sudo apt install nginx
-```
-
-Create a config at `/etc/nginx/sites-available/standing-tracker`:
-
-```nginx
-server {
-    listen 80;
-    server_name your.raspberrypi.local;
-
-    location = /favicon.ico { access_log off; log_not_found off; }
-    location /static/ {
-        root /home/pi/standing-tracker;
-    }
-
-    location / {
-        proxy_pass http://127.0.0.1:8000;
-        include proxy_params;
-        proxy_redirect off;
-    }
-}
-```
-
-Enable the site and restart Nginx:
-
-```bash
-sudo ln -s /etc/nginx/sites-available/standing-tracker /etc/nginx/sites-enabled
-sudo nginx -t
-sudo systemctl restart nginx
-```
-
----
-
-### 🔒 (Optional) Add HTTPS with Certbot
-
-If the Raspberry Pi is publicly accessible, you can use Let's Encrypt to enable HTTPS:
-
-```bash
-sudo apt install certbot python3-certbot-nginx
-sudo certbot --nginx
-```
