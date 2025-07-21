@@ -8,23 +8,24 @@ const historyAside = document.getElementById('history-aside');
 let startTime = null;
 let elapsedBeforePause = 0;
 let intervalId = null;
-let running = false;
+let isRunning = false;
 let elapsed = 0;
+let historyIsOpen = false;
 
 // Format the highscore and total time displays
 highscoreDisplay.textContent = formatTime(parseFloat(highscoreDisplay.textContent));
 totalTimeDisplay.textContent = formatTime(parseFloat(totalTimeDisplay.textContent))
 
 toggleBtn.addEventListener('click', () => {
-  if (!running) {
+  if (!isRunning) {
     startTimer();
     toggleBtn.classList.add("stop")
   } else {
     stopTimer();
     toggleBtn.classList.remove("stop")
   }
-  running = !running;
-  toggleBtn.textContent = running ? "Stop" : "Start";
+  isRunning = !isRunning;
+  toggleBtn.textContent = isRunning ? "Stop" : "Start";
 });
 
 historyBtn.addEventListener('click', () => {
