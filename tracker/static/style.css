@@ -93,6 +93,12 @@ h2 {
     transition: background-color 0.2s, color 0.2s;
 }
 
+
+.button:hover {
+  background-color: #2e2e5f;
+  color: #ffffff;
+}
+
 #toggle-btn {
     font-family: 'Share Tech Mono', monospace;
     font-size: 2rem;
