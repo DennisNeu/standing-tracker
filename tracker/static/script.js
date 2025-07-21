@@ -2,6 +2,8 @@ const timerDisplay = document.getElementById('timer-display');
 const totalTimeDisplay = document.getElementById('total-time');
 const highscoreDisplay = document.getElementById('highscore-time');
 const toggleBtn = document.getElementById('toggle-btn');
+const historyBtn = document.getElementById('history-btn');
+const historyAside = document.getElementById('history-aside');
 
 let startTime = null;
 let elapsedBeforePause = 0;
@@ -23,6 +25,10 @@ toggleBtn.addEventListener('click', () => {
   }
   running = !running;
   toggleBtn.textContent = running ? "Stop" : "Start";
+});
+
+historyBtn.addEventListener('click', () => {
+  historyAside.classList.toggle("hidden");
 });
 
 function startTimer() {

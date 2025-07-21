@@ -32,6 +32,11 @@ main {
     flex-grow: 1;
 }
 
+#content {
+    display: flex;
+    flex-direction: row;
+}
+
 h1 {
     text-align: center;
     color: var(--text-color);
