@@ -12,7 +12,8 @@
 
 </head>
 <body>
-    <main> 
+    <section id="content">
+        <main> 
         <h1 class="box">
         <pre>
    _____ __                  __   __  __      __
@@ -22,33 +23,49 @@
 /____/\__/\__,_/_/ /_/\__,_/   \____/ .___(_)   
                                    /_/          
         </pre>
-    </h1>
+        </h1>
 
-    <section class="counter box">
-        <div class="timer" id="timer-display">00 : 00 : 00.00</div>
+        <section class="counter box">
+            <div class="timer" id="timer-display">00 : 00 : 00.00</div>
+        </section>
+
+        <section class="totaltime box">
+            <div id="totaltime">
+                <h2>Total Time:</h2>
+                <div class="timer-smaller" id="total-time">{{ total }}</div>
+            </div>
+        </section>
+
+        <section class="highscore box">
+            <div id="highscore">
+                <h2>Highscore:</h2>
+                <div class="timer-smaller" id="highscore-time">{{ highscore }}</div>
+            </div>
+        </section>
+
+        <section class="buttons">
+            <button id="toggle-btn" class="button" autofocus>Start</button>
+            <button id="history-btn" class="button">History</button>
+        </section>
+
+        </main>
+
+        <aside class="hidden">
+            <h2 class="box">History</h2>
+            <div class="history box">
+                {% if history %}
+                    <ul>
+                     {% for entry in history %}
+                            <li>{{ entry.timestamp }} - {{ entry.time }}</li>
+                        {% endfor %}
+                    </ul>
+             {% else %}
+                    <p>No history available.</p>
+                {% endif %}
+        </aside>
+
     </section>
-
-    <section class="totaltime box">
-        <div id="totaltime">
-            <h2>Total Time:</h2>
-            <div class="timer-smaller" id="total-time">{{ total }}</div>
-        </div>
-    </section>
-
-    <section class="highscore box">
-        <div id="highscore">
-            <h2>Highscore:</h2>
-            <div class="timer-smaller" id="highscore-time">{{ highscore }}</div>
-        </div>
-    </section>
-
-    <section class="buttons">
-        <button id="toggle-btn" class="button" autofocus>Start</button>
-        <button id="history" class="button">History</button>
-    </section>
-
-    </main>
-
+    
     <footer>
         <p>Made with ❤️ by <a href="https://github.com/DennisNeu">DennisNeu</a></p>
     </footer>
