@@ -16,6 +16,14 @@ let historyIsOpen = false;
 highscoreDisplay.textContent = formatTime(parseFloat(highscoreDisplay.textContent));
 totalTimeDisplay.textContent = formatTime(parseFloat(totalTimeDisplay.textContent))
 
+document.querySelectorAll('li[data-seconds]').forEach(li => {
+  console.log(li.dataset.seconds);
+  console.log("Formatting time for: ", li.dataset.seconds);
+  const seconds = parseFloat(li.dataset.seconds);
+  const formatted = formatTime(seconds);
+  li.querySelector('.formatted-time').textContent = formatted;
+});
+
 toggleBtn.addEventListener('click', () => {
   if (!isRunning) {
     startTimer();
