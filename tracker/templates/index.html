@@ -55,7 +55,7 @@
                 {% if history %}
                     <ul>
                      {% for entry in history %}
-                            <li>{{ entry.timestamp }} - {{ entry.time }}</li>
+                            <li class="box">{{ entry.day }} - {{ entry.total_seconds }}</li>
                         {% endfor %}
                     </ul>
              {% else %}
