@@ -9,7 +9,7 @@ import json
 from .models import StandingTime
 
 
-def index(request):
+def standing(request):
     highscore = StandingTime.objects.all().order_by('-time').first() or StandingTime(time=0)
     total = StandingTime.objects.aggregate(Sum('time'))['time__sum'] or 0
     history = get_daily_history_qs()
