@@ -173,3 +173,12 @@ footer {
     flex: 1; /* Each div takes exactly 50% of container */
     justify-content: center;
 }
+
+.streak {
+    font-family: 'Segment7', monospace;
+    font-size: 3rem;
+    font-weight: bold;
+    padding: 1rem 2rem;
+    border-radius: 10px;
+    text-align: center;
+}
