@@ -35,10 +35,14 @@
             </div>
         </section>
 
-        <section class="highscore box">
-            <div id="highscore">
+        <section id="score-streak">
+            <div class="box half">
                 <h2>Highscore:</h2>
                 <div class="timer-smaller" id="highscore-time">{{ highscore }}</div>
+            </div>
+            <div id="streak-display" class="box half">
+              <h2>Streak:</h2>
+              <div class="streak">{{ streak }} <span class="emoji">&#128293;</span></div>
             </div>
         </section>
 

@@ -162,3 +162,14 @@ footer {
 .date {
     font-weight: bold;
 }
+
+#score-streak {
+    display: flex;
+    align-items: stretch;
+    gap: 3rem;
+}
+
+.half {
+    flex: 1; /* Each div takes exactly 50% of container */
+    justify-content: center;
+}
