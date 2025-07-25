@@ -50,13 +50,13 @@
         </main>
 
 <aside id="history-aside" class="hidden">
-  <h2 class="box">History</h2>
+  <h2>History</h2>
 
   <div class="box">
     {% if history %}
       <ul id="history-list">
         {% for entry in history %}
-          <li class="box" data-seconds="{{ entry.total_seconds }}">
+          <li class="history-item" data-seconds="{{ entry.total_seconds }}">
             {{ entry.day }} - <span class="formatted-time">loading...</span>
           </li>
         {% endfor %}
