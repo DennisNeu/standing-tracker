@@ -12,9 +12,10 @@ from .models import StandingTime
 def standing(request):
     highscore = StandingTime.objects.all().order_by('-time').first() or StandingTime(time=0)
     total = StandingTime.objects.aggregate(Sum('time'))['time__sum'] or 0
-    streak = 0 # Placeholder
+    current_streak = StandingTime.objects.current_streak(min_seconds=600000) or 0
+    longest_streak = StandingTime.objects.longest_streak(min_seconds=600000) or 0
     history = get_daily_history_qs()
-    return render(request, 'index.html', {'highscore': highscore.time, 'total': total, 'history': history, 'streak': streak})
+    return render(request, 'index.html', {'highscore': highscore.time, 'total': total, 'history': history, 'currentstreak': current_streak, 'longeststreak': longest_streak})
 
 
 @csrf_exempt  # Use this decorator to allow POST requests without CSRF token
@@ -27,7 +28,6 @@ def save_standing_time(request):
 
             total = StandingTime.objects.aggregate(Sum('time'))['time__sum'] or 0
             highscore = StandingTime.objects.all().order_by('-time').first()
-
 
             return JsonResponse({'status': 'success', 'message': 'Standing time saved successfully', 'total': total, 'highscore': highscore.time})
         except Exception as e:

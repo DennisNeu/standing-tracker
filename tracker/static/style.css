@@ -170,7 +170,6 @@ footer {
 }
 
 .half {
-    flex: 1; /* Each div takes exactly 50% of container */
     justify-content: center;
 }
 
@@ -181,4 +180,15 @@ footer {
     padding: 1rem 2rem;
     border-radius: 10px;
     text-align: center;
+}
+
+#streak-display {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    flex: 2;
+}
+
+#highscore {
+    flex: 1;
 }

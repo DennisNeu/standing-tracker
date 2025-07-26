@@ -36,13 +36,15 @@
         </section>
 
         <section id="score-streak">
-            <div class="box half">
+            <div class="box half" id="highscore">
                 <h2>Highscore:</h2>
                 <div class="timer-smaller" id="highscore-time">{{ highscore }}</div>
             </div>
             <div id="streak-display" class="box half">
-              <h2>Streak:</h2>
-              <div class="streak">{{ streak }} &#128293;</div>
+              <h2>Current Streak:</h2>
+              <div class="streak">{{ currentstreak }} &#128293;</div>
+              <h2>Longest Streak:</h2>
+              <div class="streak">{{ longeststreak }} &#127942;</div>
             </div>
         </section>
 
