@@ -3,6 +3,7 @@ A web-application to monitor and log your standing time at a sit-stand desk, pro
 ## Features
 - **User Interface**: Intuitive, minimalistic UI for easy interaction in a dark theme (as all software should be).
 - **Session Tracking**: Start and stop timers to record standing sessions.
+- **Streaks**: Display streaks to show how many days in a row you've used your standing desk!
 - **Total Time Tracking**: Track total time spent standing (*gamification*).
 - **Data Logging**: Persistent storage of session data for historical reference.
 
@@ -59,9 +60,17 @@ pip install -r requirements.txt
 
 ### 🔧 5. Configure Django for Deployment
 
-Open `tracker/settings.py` and:
+Open `tracker/settings.py` with:
+
+```bash
+nano tracker/settings.py
+```
+
+Do the following (if not already done):
+
 - Set `DEBUG = False`
-- Add your Pi’s IP or hostname to `ALLOWED_HOSTS`, e.g.:
+- Add your Pi’s IP or hostname to `ALLOWED_HOSTS` (find line in document), e.g.:
+
 
 ```python
 ALLOWED_HOSTS = ['192.168.178.5', 'localhost']
@@ -101,7 +110,7 @@ ExecStart=/home/pi/standing-tracker/venv/bin/gunicorn --workers 3 --bind 127.0.0
 WantedBy=multi-user.target
 ```
 
-Save and exit, then:
+Save and exit (CTRL + S then CTRL + X), then:
 
 ```bash
 sudo systemctl daemon-reexec
