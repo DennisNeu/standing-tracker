@@ -70,12 +70,12 @@ Do the following (if not already done):
 
 - Set `DEBUG = False`
 - Add your Pi’s IP or hostname to `ALLOWED_HOSTS` (find line in document), e.g.:
-- Add this line `STATIC_ROOT = 'staticdeploy/'`
-
 
 ```python
 ALLOWED_HOSTS = ['192.168.178.5', 'localhost']
 ```
+
+- Add this line `STATIC_ROOT = 'staticdeploy/'` to settings.py
 
 Collect static files:
 
