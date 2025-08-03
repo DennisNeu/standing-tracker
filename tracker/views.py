@@ -15,7 +15,7 @@ def standing(request):
     current_streak = StandingTime.objects.current_streak(min_seconds=600000) or 0
     longest_streak = StandingTime.objects.longest_streak(min_seconds=600000) or 0
     history = get_daily_history_qs()
-    best_day = history.first() if history else None
+    best_day = history.order_by('-time').first() if history else None
     print(f"Best day: {best_day}")
     return render(request, 'index.html', {'highscore': highscore.time, 'total': total, 'history': history, 'currentstreak': current_streak, 'longeststreak': longest_streak})
 
