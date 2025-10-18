@@ -61,3 +61,7 @@ class StandingTime(models.Model):
 
     def __str__(self):
         return f"{self.id}: {self.time} seconds"
+    
+class StateEvent(models.Model):
+    ts = models.DateTimeField(default=timezone.now, db_index=True)
+    state = models.CharField(max_length=16)  # "sitting" | "standing"

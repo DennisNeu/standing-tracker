@@ -17,10 +17,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from . import views
+from .views_api import state_event
 
 urlpatterns = [
     path('standing', views.standing, name='standing'),
     path('api/submit-time/', views.save_standing_time, name='save_standing_time'),
     path('admin/', admin.site.urls),
-
+    path("api/v1/state", state_event, name="state_event"),
 ]
